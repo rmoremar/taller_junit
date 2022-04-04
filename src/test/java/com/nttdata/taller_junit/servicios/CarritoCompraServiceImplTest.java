@@ -1,12 +1,15 @@
 package com.nttdata.taller_junit.servicios;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.nttdata.taller_junit.modelos.Articulo;
@@ -80,7 +83,14 @@ public class CarritoCompraServiceImplTest {
 	
 	@Test
 	public void testInsertar() {
-		
+		Articulo art = new Articulo("Gorra de caja rural", 199.99);
+		int res = 9;
+		when(bbdd.insertArticulo(art)).thenReturn(res);
+		assertEquals(res, 9);
+		verify(bbdd.insertArticulo(Mockito.any()));
+		assertTrue(bbdd.findArticuloById(9).getNombre().equals("Gorra de caja rural"));
+		assertTrue(bbdd.findArticuloById(9).getPrecio() == 199.99);
+		verify(bbdd,atLeastOnce());
 	}
 	
 }
