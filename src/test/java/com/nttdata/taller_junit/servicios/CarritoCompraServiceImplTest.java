@@ -88,8 +88,8 @@ public class CarritoCompraServiceImplTest {
 		when(bbdd.insertArticulo(art)).thenReturn(res);
 		assertEquals(res, 9);
 		verify(bbdd.insertArticulo(Mockito.any()));
-		assertTrue(bbdd.findArticuloById(9).getNombre().equals("Gorra de caja rural"));
-		assertTrue(bbdd.findArticuloById(9).getPrecio() == 199.99);
+		assertTrue(carritoService.getArticulos().get(9).getNombre().equals("Gorra de caja rural"));
+		assertTrue(carritoService.getArticulos().get(9).getPrecio() == 199.99);
 		verify(bbdd,atLeastOnce());
 	}
 	
